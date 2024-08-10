@@ -52,6 +52,9 @@ export class HomeComponent implements OnInit {
   }
 
   addTask() {
+    if(this.tasks.find(t => t.name === this.todoInputText.value)) {
+      alert('Task already exists!');
+    }   
     this.tasks.push({ name: this.todoInputText.value, done: false, date: new Date() });
     this.todoInputText.setValue('');
     this.updateLocalStorage();
