@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';
+
+:root {
+  --colors-white: #ffffff;
+  --colors-purple500: #9e78cf;
+  --colors-purple800: #15101c;
+  --colors-purple900: #0d0714;
+  --colors-green500: #78cfb0;
+  --colors-gray500: #777777;
+
+  --rem: 16;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  background: var(--colors-purple900);
+}
+
+button {
+  border: none;
+}

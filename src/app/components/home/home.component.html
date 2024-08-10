@@ -1,0 +1,82 @@
+<div class="todo_container">
+  <div class="input">
+    <input type="text" placeholder="Add a task" class="task_input" [formControl]="todoInputText" />
+    <button class="task_add" (click)="addTask()" [ngClass]="{'disabled' : todoInputText.value == ''}">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 256 256">
+        <rect width="256" height="256" fill="none"></rect>
+        <line x1="40" y1="128" x2="216" y2="128" fill="none" stroke="currentColor" stroke-linecap="round"
+          stroke-linejoin="round" stroke-width="16"></line>
+        <line x1="128" y1="40" x2="128" y2="216" fill="none" stroke="currentColor" stroke-linecap="round"
+          stroke-linejoin="round" stroke-width="16"></line>
+      </svg>
+    </button>
+  </div>
+
+  @let pendingTasks = getPendingTasks();
+  @if(pendingTasks.length > 0) {
+    <div class="tiles tasks">
+      <h1>Tasks : {{ pendingTasks.length }}</h1>
+      @for (task of pendingTasks; track task) {
+      <li class="task">
+        {{ task.name }}
+        <span>
+          <button type="button" class="done" (click)="complete(task)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 256 256">
+              <rect width="256" height="256" fill="none"></rect>
+              <polyline points="216 72 104 184 48 128" fill="none" stroke="currentColor" stroke-linecap="round"
+                stroke-linejoin="round" stroke-width="16"></polyline>
+            </svg>
+          </button>
+          <button type="button" class="delete" (click)="remove(task)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 256 256">
+              <rect width="256" height="256" fill="none"></rect>
+              <line x1="216" y1="56" x2="40" y2="56" fill="none" stroke="currentColor" stroke-linecap="round"
+                stroke-linejoin="round" stroke-width="16"></line>
+              <line x1="88" y1="24" x2="168" y2="24" fill="none" stroke="currentColor" stroke-linecap="round"
+                stroke-linejoin="round" stroke-width="16"></line>
+              <path d="M200,56V208a8,8,0,0,1-8,8H64a8,8,0,0,1-8-8V56" fill="none" stroke="currentColor"
+                stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path>
+            </svg>
+          </button>
+        </span>
+      </li>
+      }
+    </div>
+    } @else {
+    <div class="text-center">
+      <h2>No tasks</h2>
+    </div>
+  }
+
+  @let doneTasks = getDoneTasks();
+  @if(doneTasks.length > 0) {
+  <div class="tiles done">
+    <h1>Completed : {{ doneTasks.length }}</h1>
+    @for (task of doneTasks; track task) {
+      <li class="task">
+        {{ task.name }}
+        <span>
+          <button type="button" class="done" (click)="restore(task)">
+            <svg height="26" fill="currentColor" viewBox="0 0 48 48" width="26" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 0h48v48h-48z" fill="none" />
+              <path
+                d="M25.99 6c-9.95 0-17.99 8.06-17.99 18h-6l7.79 7.79.14.29 8.07-8.08h-6c0-7.73 6.27-14 14-14s14 6.27 14 14-6.27 14-14 14c-3.87 0-7.36-1.58-9.89-4.11l-2.83 2.83c3.25 3.26 7.74 5.28 12.71 5.28 9.95 0 18.01-8.06 18.01-18s-8.06-18-18.01-18zm-1.99 10v10l8.56 5.08 1.44-2.43-7-4.15v-8.5h-3z" />
+            </svg>
+          </button>
+          <button type="button" class="delete" (click)="remove(task)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 256 256">
+              <rect width="256" height="256" fill="none"></rect>
+              <line x1="216" y1="56" x2="40" y2="56" fill="none" stroke="currentColor" stroke-linecap="round"
+                stroke-linejoin="round" stroke-width="16"></line>
+              <line x1="88" y1="24" x2="168" y2="24" fill="none" stroke="currentColor" stroke-linecap="round"
+                stroke-linejoin="round" stroke-width="16"></line>
+              <path d="M200,56V208a8,8,0,0,1-8,8H64a8,8,0,0,1-8-8V56" fill="none" stroke="currentColor"
+                stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path>
+            </svg>
+          </button>
+        </span>
+      </li> 
+    }
+  </div>
+  }
+</div>
